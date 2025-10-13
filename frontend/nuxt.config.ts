@@ -8,6 +8,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  runtimeConfig: {
+    public: {
+      backend: ""
+    }
+  },
   app: {
     head: {
       title: "free jobs",

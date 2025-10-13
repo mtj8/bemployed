@@ -6,7 +6,13 @@
 npm i
 ```
 
-2. host it
+2. make env
+
+```sh
+NUXT_PUBLIC_BACKEND=http://127.0.0.1:8000/
+```
+
+3. host it
 
 ```sh
 npm run dev
