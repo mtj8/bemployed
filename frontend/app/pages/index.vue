@@ -1,0 +1,9 @@
+<template>
+  <div class="flex h-screen w-screen flex-col items-center justify-center">
+    <h1 class="text-5xl font-bold">whats a shower</h1>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>
