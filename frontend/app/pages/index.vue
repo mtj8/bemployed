@@ -4,6 +4,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  requiresAuth: false,
+  redirectIfAuth: false
+});
+</script>
 
 <style scoped></style>

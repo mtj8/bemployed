@@ -1,13 +1,13 @@
-interface Success<T> {
+type Success<T> = {
   data: T;
   error?: never;
-}
-interface Failure<E> {
+};
+type Failure<E> = {
   data?: never;
   error: E;
-}
-
+};
 export type Result<T, E = Error> = Success<T> | Failure<E>;
+
 /** Implements try/catch for a given promise.
  *
  * If the promise resolves, returns an object with a `data` property. If the promise rejects, returns an object with an `error` property.
@@ -65,7 +65,7 @@ async function requestEndpoint<T>(endpoint: string, method?: string, body?: obje
  * @param method - the HTTP method to use for the request. Defaults to `"GET"`.
  * @param body - the body of the request as an object. It will be automaitcally converted to a JSON object.
  */
-export async function tryRequestEndpoint(endpoint: string, method?: string, body?: object): Promise<Result<void>>;
+export async function fetchEndpoint(endpoint: string, method?: string, body?: object): Promise<Result<void>>;
 /** **Serves as a wrapper for `tryCatch(requestEndpoint())`.**
  * @template T - the type of the request's response
  * @param endpoint - the endpoint to request. It will be automatically appended to the base URL, **so it should NOT start with a `/`**.
@@ -73,7 +73,7 @@ export async function tryRequestEndpoint(endpoint: string, method?: string, body
  * @param body - the body of the request as an object. It will be automaitcally converted to a JSON object.
  * @returns the JSON response from the request.
  */
-export async function tryRequestEndpoint<T, K = Error>(endpoint: string, method?: string, body?: object): Promise<Result<T, K>>;
-export async function tryRequestEndpoint<T, K = Error>(endpoint: string, method?: string, body?: object): Promise<Result<T | void, K>> {
+export async function fetchEndpoint<T, K = Error>(endpoint: string, method?: string, body?: object): Promise<Result<T, K>>;
+export async function fetchEndpoint<T, K = Error>(endpoint: string, method?: string, body?: object): Promise<Result<T | void, K>> {
   return tryCatch<T, K>(requestEndpoint<T>(endpoint, method, body));
 }
