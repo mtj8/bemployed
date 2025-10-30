@@ -3,6 +3,8 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "typecheck": "vue-tsc --noEmit",
+    "prettier-check": "prettier . --check",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -18,5 +20,10 @@
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.1.2"
   }
 }
