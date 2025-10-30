@@ -1,18 +1,20 @@
 # Frontend Setup
 
-1. install node modules
+1. make sure [node.js](https://nodejs.org/en) is installed
+
+2. install node modules
 
 ```sh
 npm i
 ```
 
-2. make env
+3. make env
 
 ```sh
 NUXT_PUBLIC_BACKEND=http://127.0.0.1:8000/
 ```
 
-3. host it
+4. host it
 
 ```sh
 npm run dev
