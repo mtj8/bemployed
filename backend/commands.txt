@@ -1,0 +1,22 @@
+docker compose build # to build the docker containers
+
+docker compose up / down # up to start everything and down to stop everything nicely
+
+# Postgres
+==========
+
+docker exec -it postgres psql -U postgres
+\c <database_name> # enter a database, just do \c for the default db
+\d # view the stuff in the database like tables and shi
+\d+ <table_name>
+\q # quit
+
+
+==========
+# Docker
+==========
+
+docker exec -it django bash # enter the container, run python commands and all that stuff here
+
+
+==========

@@ -1,0 +1,37 @@
+services:
+  pgdb:
+    image: postgres:16
+    container_name: pgdb
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data    # allows db to be persistent in dev build
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  django:
+    build:
+      context: .   # builds from /backend
+      dockerfile: Dockerfile
+    container_name: django
+    working_dir: /app # where the commands will be run
+    command: bash -lc "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@pgdb:5432/postgres
+    volumes:
+      - ./django-project:/app # mount the Django app folder
+    ports:
+      - "8000:8000"
+    depends_on:
+      pgdb:
+        condition: service_healthy
+
+volumes:
+  pgdata:
