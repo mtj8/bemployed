@@ -27,6 +27,7 @@ jobs:
             **/.env
             **/*.env.*
             **/venv/**
+            **/.venv/**
           files_ignore: |
             **/.env.example
 
