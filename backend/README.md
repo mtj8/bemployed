@@ -6,6 +6,12 @@
 - **Docker Compose v2** plugin
 
 ## Setup
+first setup .env file
+
+use .env.example
+
+or look at the shared drive for mine
+
 *might need to use sudo*
 
 docker compose build
