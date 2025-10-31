@@ -8,7 +8,7 @@
 ## Setup
 first setup .env file
 
-use .env.example
+use example_env
 
 or look at the shared drive for mine
 
