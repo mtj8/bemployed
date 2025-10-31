@@ -27,6 +27,7 @@ jobs:
             **/.env
             **/*.env.*
             **/venv/**
+            **/.venv/**
 
       - name: Fail if bad files added
         if: steps.changed_files.outputs.any_changed == 'true' || steps.changed_files.outputs.any_modified == 'true'
