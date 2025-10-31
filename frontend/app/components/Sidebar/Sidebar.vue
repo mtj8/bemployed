@@ -14,10 +14,9 @@
 
 <script setup lang="ts">
 const route = useRoute();
-const router = useRouter();
 
-const userStore = useUserStore();
-const { currentHackathons } = storeToRefs(userStore);
+// const userStore = useUserStore();
+// const { currentHackathons } = storeToRefs(userStore);
 
 const pageLinks = [
   {

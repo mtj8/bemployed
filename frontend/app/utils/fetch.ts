@@ -1,11 +1,11 @@
-type Success<T> = {
+interface Success<T> {
   data: T;
   error?: never;
-};
-type Failure<E> = {
+}
+interface Failure<E> {
   data?: never;
   error: E;
-};
+}
 export type Result<T, E = Error> = Success<T> | Failure<E>;
 
 /** Implements try/catch for a given promise.

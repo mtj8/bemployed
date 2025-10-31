@@ -1,10 +1,10 @@
-export type SidebarLink = {
+export interface SidebarLink {
   name: string;
   icon: string;
   path: string;
-};
+}
 
-export type User = {
+export interface User {
   uuid: string;
   /** User's display name */
   displayName: string;
@@ -18,9 +18,9 @@ export type User = {
   level: number;
   /** User's experience points */
   xp: number;
-};
+}
 
-export type Hackathon = {
+export interface Hackathon {
   uuid: string;
   /** Name of the hackathon */
   name: string;
@@ -32,4 +32,4 @@ export type Hackathon = {
   endDate: number;
   /** Number of participants in the hackathon */
   participants: number;
-};
+}
