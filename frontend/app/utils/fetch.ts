@@ -57,7 +57,16 @@ async function requestEndpoint<T>(endpoint: string, method?: string, body?: obje
   const contentLength = res.headers.get("Content-Length");
   if (contentLength === "0") return undefined as T;
 
-  return res.json();
+  const data = await res.json();
+  if (typeof data !== "object" || Array.isArray(data)) return data as T;
+
+  const camelCaseData: any = {};
+  for (const key in data) {
+    const camelCaseKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    camelCaseData[camelCaseKey] = data[key];
+  }
+
+  return camelCaseData as T;
 }
 
 /** **Serves as a wrapper for `tryCatch(requestEndpoint())`.**

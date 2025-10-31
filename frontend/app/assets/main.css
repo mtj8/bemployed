@@ -6,12 +6,23 @@
 }
 
 @theme {
-  --color-base-bg: #303030;
-  --color-base-text: #c8c8c8;
+  --color-bg-lighter: #363636;
+  --color-bg-base: #303030;
+  --color-bg-darker: #282828;
+  --color-text-base: #c8c8c8;
+  --color-text-lighter: #e0e0e0;
 }
 
 html {
-  @apply bg-base-bg text-base-text;
+  @apply bg-bg-darker text-text-base;
+}
+
+body {
+  @apply bg-bg-base;
+}
+
+button {
+  @apply cursor-pointer;
 }
 
 * {

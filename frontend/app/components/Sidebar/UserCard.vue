@@ -1,0 +1,34 @@
+<template>
+  <NuxtLink to="/profile" class="group bg-bg-base hover:bg-bg-lighter relative flex h-24 w-full flex-col items-center justify-center rounded-lg pt-1 shadow-lg transition" v-if="user">
+    <div class="mb-2 flex w-full items-center justify-around">
+      <div class="flex items-center justify-center gap-3 select-none">
+        <div class="size-10 shrink-0 rounded-full bg-neutral-300"></div>
+
+        <div class="flex flex-col items-start justify-center">
+          <p class="w-32 overflow-hidden text-nowrap overflow-ellipsis">{{ user.displayName }}</p>
+          <p class="text-text-lighter text-xs">@{{ user.username }}</p>
+        </div>
+      </div>
+
+      <NuxtLink to="/profile/settings" class="du-tooltip group/settings rounded-full p-1 transition hover:bg-neutral-700" data-tip="User Settings" @click.prevent>
+        <img class="size-6 transition-transform duration-1500 group-hover/settings:rotate-360 group-hover/settings:brightness-110" src="/icons/settings.svg" alt="Open user settings" />
+      </NuxtLink>
+    </div>
+
+    <div class="du-tooltip absolute bottom-0 left-0 w-full cursor-default" @click.prevent :data-tip="`Level ${user.level} - ${user.xp}/100 XP`">
+      <div class="relative h-1 w-full overflow-hidden rounded-b-lg bg-neutral-900 transition-[height] group-hover:h-1.5">
+        <div
+          class="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500 via-green-400 to-green-500 transition group-hover:brightness-125"
+          :style="{ width: `${Math.max(5, Math.min(user.xp, 95))}%` }"
+        ></div>
+      </div>
+    </div>
+  </NuxtLink>
+</template>
+
+<script setup lang="ts">
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
+</script>
+
+<style scoped></style>
