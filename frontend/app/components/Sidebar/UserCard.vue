@@ -1,5 +1,9 @@
 <template>
-  <NuxtLink v-if="user" to="/profile" class="group/user-card bg-bg-base hover:bg-bg-lighter relative flex h-24 w-full flex-col items-center justify-center rounded-lg pt-1 shadow-lg transition">
+  <NuxtLink
+    v-if="user"
+    to="/profile"
+    class="group/user-card bg-bg-base hover:bg-bg-lighter absolute bottom-3 left-1/2 flex h-18 w-19/20 -translate-x-1/2 flex-col items-center justify-center rounded-lg pt-1 shadow-lg transition"
+  >
     <div class="mb-2 flex w-full items-center justify-around">
       <div class="flex items-center justify-center gap-3 select-none">
         <div class="size-10 shrink-0 rounded-full bg-neutral-300"></div>

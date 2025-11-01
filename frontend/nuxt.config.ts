@@ -16,16 +16,16 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: "free jobs",
+      title: "not discord",
       meta: [
         { charset: "UTF-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1.0" },
         { name: "mobile-web-app-capable", content: "yes" },
-        { property: "og:title", content: "free jobs" },
-        { property: "og:site_name", content: "free jobs llc" },
+        { property: "og:title", content: "not discord" },
+        { property: "og:site_name", content: "not discord" },
         { property: "og:type", content: "website" },
-        { name: "description", content: "i want a job too" },
-        { property: "og:description", content: "i want a job too" }
+        { name: "description", content: "this is NOT discord" },
+        { property: "og:description", content: "this is NOT discord" }
       ],
       // link: [{ rel: "icon", type: "image/png", href: "/seagull.png" }],
       htmlAttrs: {

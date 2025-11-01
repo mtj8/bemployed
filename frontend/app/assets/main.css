@@ -15,6 +15,8 @@
 
 html {
   @apply bg-bg-darker text-text-base;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 body {

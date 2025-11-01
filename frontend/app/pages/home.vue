@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col items-center justify-center overflow-y-scroll">
-    <h1 class="text-5xl font-bold">whats a shower</h1>
-    <p>fgiosahgisdghudsiu</p>
+    <h2 class="text-3xl font-bold">hey user</h2>
+    <p>upcoming hackathons</p>
+    <p>find new hackathons button</p>
+    <p>idk</p>
   </div>
 </template>
 
