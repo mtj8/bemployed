@@ -27,7 +27,7 @@ class User(models.Model):
 
     # EXTREMELY IMPORTANT
     xp = models.IntegerField(default=0)
-    level = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(500))
+    level = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(500)])
     xpneeded = models.IntegerField(default=100)
 
     # Optional
