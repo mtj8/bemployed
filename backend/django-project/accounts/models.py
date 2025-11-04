@@ -2,7 +2,6 @@ from django.db import models
 import uuid
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-
 # Helper tables
 class Skill(models.Model): # optional skills for the user
     name = models.CharField(max_length=25, unique=True, db_index=True)
@@ -27,7 +26,9 @@ class User(models.Model):
 
     # EXTREMELY IMPORTANT
     xp = models.IntegerField(default=0)
-    level = models.PositiveSmallIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(500)])
+    level = models.PositiveSmallIntegerField(default=0, 
+        validators=[MinValueValidator(0), MaxValueValidator(500)]
+    )
     xpneeded = models.IntegerField(default=100)
 
     # Optional
