@@ -40,8 +40,8 @@ docker compose up
 
 ## Models
 
-### accounts
-
+### Accounts
+```mermaid
 erDiagram
     USER {
         UUID id PK
@@ -76,7 +76,6 @@ erDiagram
         string name
     }
 
-    %% Many-to-many via implicit through tables
     USER ||--o{ USER_SKILLS : "has"
     SKILL ||--o{ USER_SKILLS : "used by"
 
@@ -92,4 +91,4 @@ erDiagram
         UUID user_id FK
         int interest_id FK
     }
-
+```
