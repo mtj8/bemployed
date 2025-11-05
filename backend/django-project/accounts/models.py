@@ -6,8 +6,13 @@ from django.contrib.auth.models import AbstractUser
 # Helper tables
 class Skill(models.Model): # optional skills for the user
     name = models.CharField(max_length=25, unique=True, db_index=True)
+    def __str__(self): 
+        return f"{self.name}"
+
 class Interest(models.Model): # optional interests for the user
     name = models.CharField(max_length=25, unique=True, db_index=True)
+    def __str__(self): 
+        return f"{self.name}"
 
 # Main tables
 class User(AbstractUser):
@@ -51,6 +56,7 @@ class User(AbstractUser):
             db_index=True,
             help_text="4-digit grad year (e.g. 2028)"
     )
+    major = models.CharField(max_length=50, blank=True)
 
     # Socials
     discord = models.URLField(max_length=200, null=True, blank=True)
