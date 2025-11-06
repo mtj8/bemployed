@@ -52,10 +52,7 @@ erDiagram
         string visibility
         smallint xp
         smallint level
-        smallint xpneeded
-        string school
         smallint grad_year
-        string major
         string discord
         string instagram
         string github
@@ -64,6 +61,16 @@ erDiagram
         json blocked
         datetime updated_at
         datetime date_joined
+    }
+
+    SCHOOL {
+        int id PK
+        string name
+    }
+
+    MAJOR {
+        int id PK
+        string name
     }
 
     SKILL {
@@ -76,6 +83,7 @@ erDiagram
         string name
     }
 
+    %% --- Many-To-Many Relations ---
     USER ||--o{ USER_SKILLS : "has"
     SKILL ||--o{ USER_SKILLS : "used by"
 
@@ -91,4 +99,8 @@ erDiagram
         UUID user_id FK
         int interest_id FK
     }
+
+    %% --- Many-To-One ( User -> School/Major ) ---
+    SCHOOL ||--o{ USER : "has many"
+    MAJOR  ||--o{ USER : "has many"
 ```

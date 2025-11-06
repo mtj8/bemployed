@@ -14,6 +14,16 @@ class Interest(models.Model): # optional interests for the user
     def __str__(self): 
         return f"{self.name}"
 
+class School(models.Model): # school user goes to
+    name = models.CharField(max_length=100, unique=True, db_index=True)
+    def __str__(self):
+        return self.name
+
+class Major(models.Model): # majors
+    name = models.CharField(max_length=25, unique=True, db_index=True)
+    def __str__(self):
+        return self.name
+
 # Main tables
 class User(AbstractUser):
     # UUID
@@ -45,18 +55,24 @@ class User(AbstractUser):
     level = models.PositiveSmallIntegerField(default=0,
         validators=[MaxValueValidator(500)]
     )
-    xpneeded = models.PositiveSmallIntegerField(default=100,
-        validators=[MaxValueValidator(500)]
-    )
 
     # Optional
-    school = models.CharField(max_length=100, blank=True, null=True, db_index=True)
-    grad_year = models.PositiveSmallIntegerField(null=True, blank=True, 
-            validators=[MinValueValidator(2015), MaxValueValidator(2080)],
-            db_index=True,
-            help_text="4-digit grad year (e.g. 2028)"
+    school = models.ForeignKey(School, 
+        on_delete=models.SET_NULL, 
+        null=True, blank=True,
+        related_name="users"
     )
-    major = models.CharField(max_length=50, blank=True)
+    grad_year = models.PositiveSmallIntegerField(null=True, blank=True, 
+        validators=[MinValueValidator(2015), MaxValueValidator(2080)],
+        db_index=True,
+        help_text="4-digit grad year (e.g. 2028)"
+    )
+    # major = models.CharField(max_length=50, blank=True)
+    major = models.ForeignKey(Major,
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name="users"
+    )
 
     # Socials
     discord = models.URLField(max_length=200, null=True, blank=True)

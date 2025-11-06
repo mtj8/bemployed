@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, Skill, Interest # custom user
+from .models import User, Skill, Interest, School, Major
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
@@ -13,7 +13,7 @@ class UserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = "__all__"
-        readonly_fields = ["level","xp","xpneeded","date_joined", "last_login", "updated_at"]
+        readonly_fields = ["level","xp","date_joined", "last_login", "updated_at"]
 
 class UserCreationForm(AdminUserCreationForm):
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
@@ -50,7 +50,7 @@ class UserAdmin(BaseUserAdmin):
     list_display  = ["email", "first_name", "last_name", "username", "visibility", "school", "grad_year", "date_joined"]
 
     # fields for when user is edited
-    readonly_fields = ["level","xp","xpneeded","date_joined", "last_login", "updated_at"]
+    readonly_fields = ["level","xp","date_joined", "last_login", "updated_at"]
     fieldsets = [
         (
             None, {"fields": ["email", "password", "visibility"]}
@@ -66,7 +66,7 @@ class UserAdmin(BaseUserAdmin):
                 "classes": ["collapse","wide"],
                 "fields": [
                     "bio", ("skills", "interests"),
-                    "level", ("xp", "xpneeded"), "blocked"
+                    "level", ("xp"), "blocked"
                 ]
             }
         ),
@@ -101,5 +101,15 @@ class SkillAdmin(admin.ModelAdmin):
 
 @admin.register(Interest)
 class InterestAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
+    list_display  = ("name",)
+
+@admin.register(School)
+class SchoolAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
+    list_display  = ("name",)
+
+@admin.register(Major)
+class MajorAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     list_display  = ("name",)
