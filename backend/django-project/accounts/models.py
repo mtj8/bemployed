@@ -84,13 +84,13 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
     skills = models.ManyToManyField(Skill, blank=True, related_name="users")
     interests  = models.ManyToManyField(Interest,  blank=True, related_name="users")
-    blocked = models.JSONField(null=True,blank=True,default=list)
+    blocked = models.JSONField(blank=True,default=list)
 
     # Extra info
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["date_joined"] # ordered by oldest to newest
+        ordering = ["-date_joined"] # newest to oldest
 
     def __str__(self): #how this table is visualized as plain text
         return f"{self.email}"

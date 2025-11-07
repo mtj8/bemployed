@@ -36,6 +36,7 @@ docker compose up
 
 ## Tips
 - NEVER run pip install ....   instead add it to requirements.txt
+    - sudo docker compose up --build
 - Don't run django commands outside of the docker container (explanation on how to enter in commands section)
 
 ## Models

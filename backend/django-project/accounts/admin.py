@@ -4,16 +4,15 @@ from .models import User, Skill, Interest, School, Major
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import AdminUserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AdminUserCreationForm, UserChangeForm as BaseUserChangeForm
 
 # admin.site.register(User, UserAdmin)
-class UserChangeForm(UserChangeForm):
+class UserChangeForm(BaseUserChangeForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
         fields = "__all__"
-        readonly_fields = ["level","xp","date_joined", "last_login", "updated_at"]
 
 class UserCreationForm(AdminUserCreationForm):
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
@@ -50,7 +49,6 @@ class UserAdmin(BaseUserAdmin):
     list_display  = ["email", "first_name", "last_name", "username", "visibility", "school", "grad_year", "date_joined"]
 
     # fields for when user is edited
-    readonly_fields = ["level","xp","date_joined", "last_login", "updated_at"]
     fieldsets = [
         (
             None, {"fields": ["email", "password", "visibility"]}
@@ -113,3 +111,4 @@ class SchoolAdmin(admin.ModelAdmin):
 class MajorAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     list_display  = ("name",)
+
