@@ -1,7 +1,7 @@
 <template>
   <div class="bg-bg-darker relative flex h-full w-72 shrink-0 flex-col items-center justify-between p-3">
     <div class="flex w-full flex-col items-center justify-center gap-1">
-      <SidebarPageLink v-for="link in pageLinks" :key="link.path" :link="link" :is-active="route.path === link.path" />
+      <SidebarPageLink v-for="link in pageLinks" :key="link.path" :link="link" :is-active="route.path === link.path || ('customActiveTest' in link ? link.customActiveTest() : false)" />
     </div>
 
     <div class="my-3 h-1 w-full rounded-full bg-neutral-700"></div>
@@ -18,7 +18,7 @@
 const route = useRoute();
 
 const userStore = useUserStore();
-const { currentHackathons } = storeToRefs(userStore);
+const { currentHackathons, friends } = storeToRefs(userStore);
 
 const pageLinks = [
   {
@@ -34,7 +34,8 @@ const pageLinks = [
   {
     name: "Friends",
     icon: "/icons/people.svg",
-    path: "/profile/friends"
+    path: "/profile/friends",
+    customActiveTest: () => route.name === "profile-uuid" && friends.value.some((friend) => route.params.uuid === friend.uuid) // viewing a profile and theyre a friend
   }
 ] as const satisfies SidebarLink[];
 </script>

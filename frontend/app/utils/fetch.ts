@@ -27,6 +27,26 @@ async function tryCatch<T, E = Error>(promise: Promise<T>): Promise<Result<T, E>
   }
 }
 
+function toCamelCase(obj: object) {
+  const camelCaseData: object = {};
+  for (const key in obj) {
+    const camelCaseKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    // @ts-expect-error dont care just any
+    camelCaseData[camelCaseKey] = obj[key];
+  }
+  return camelCaseData;
+}
+
+function toSnakeCase(obj: object) {
+  const snakeCaseData: object = {};
+  for (const key in obj) {
+    const snakeCaseKey = key.replace(/([A-Z])/g, (_, letter) => `_${letter.toLowerCase()}`);
+    // @ts-expect-error dont care just any
+    snakeCaseData[snakeCaseKey] = obj[key];
+  }
+  return snakeCaseData;
+}
+
 /** Makes a request to the given endpoint with the given method and body.
  * @param endpoint - the endpoint to request. It will be automatically appended to the base URL, **so it should NOT start with a `/`**.
  * @param method - the HTTP method to use for the request. Defaults to `"GET"`.
@@ -48,7 +68,7 @@ async function requestEndpoint<T>(endpoint: string, method?: string, body?: obje
   if (method) {
     options.method = method;
     options.headers = { "Content-Type": "application/json" };
-    options.body = JSON.stringify(body);
+    options.body = JSON.stringify(typeof body !== "object" || Array.isArray(body) ? body : toSnakeCase(body));
   }
 
   const res = await fetch(config.public.backend + endpoint, options);
@@ -58,15 +78,7 @@ async function requestEndpoint<T>(endpoint: string, method?: string, body?: obje
   if (contentLength === "0") return undefined as T;
 
   const data = await res.json();
-  if (typeof data !== "object" || Array.isArray(data)) return data as T;
-
-  const camelCaseData: any = {};
-  for (const key in data) {
-    const camelCaseKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-    camelCaseData[camelCaseKey] = data[key];
-  }
-
-  return camelCaseData as T;
+  return (typeof data !== "object" || Array.isArray(data) ? data : toCamelCase(data)) as T;
 }
 
 /** **Serves as a wrapper for `tryCatch(requestEndpoint())`.**

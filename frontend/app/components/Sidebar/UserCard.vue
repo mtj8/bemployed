@@ -6,7 +6,7 @@
   >
     <div class="mb-2 flex w-full items-center justify-around">
       <div class="flex items-center justify-center gap-3 select-none">
-        <div class="size-10 shrink-0 rounded-full bg-neutral-300"></div>
+        <UserProfileCircle :gradient="user.profileGradient" />
 
         <div class="flex flex-col items-start justify-center">
           <p class="w-32 overflow-hidden text-nowrap overflow-ellipsis">{{ user.displayName }}</p>
@@ -19,11 +19,11 @@
       </NuxtLink>
     </div>
 
-    <div class="du-tooltip absolute bottom-0 left-0 w-full cursor-default" :data-tip="`Level ${user.level} - ${user.xp}/100 XP`" @click.prevent>
+    <div class="du-tooltip absolute bottom-0 left-0 w-full cursor-default" :data-tip="`Level ${user.level} - ${user.xp}/${user.xpNeeded} XP`" @click.prevent>
       <div class="relative h-1 w-full overflow-hidden rounded-b-lg bg-neutral-900 transition-[height] group-hover/user-card:h-1.5">
         <div
           class="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500 via-green-400 to-green-500 transition group-hover:brightness-125"
-          :style="{ width: `${Math.max(5, Math.min(user.xp, 95))}%` }"
+          :style="{ width: `${Math.max(5, Math.min((user.xp / user.xpNeeded) * 100, 95))}%` }"
         ></div>
       </div>
     </div>
