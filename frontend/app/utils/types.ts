@@ -1,38 +1,14 @@
 export interface SidebarLink {
+  /** Name of the link. */
   readonly name: string;
+  /** Path to the link's icon, from the /public directory. */
   readonly icon: string;
+  /** Path of the link. */
   readonly path: string;
+  /** Custom active test function for the link, if needed. */
   readonly customActiveTest?: () => boolean;
 }
 
-export interface Team {
-  readonly uuid: string;
-  name: string;
-  /** When the team was created.
-   * @warning Must be parsed from a unix timestamp in seconds
-   */
-  readonly createdAt: Date;
-  readonly members: PublicUser[];
-}
-
-export interface Hackathon {
-  readonly uuid: string;
-  /** Name of the hackathon */
-  name: string;
-  /** Description of the hackathon */
-  description: string;
-  /** Start date of the hackathon.
-   * @warning Must be parsed from a unix timestamp in seconds
-   */
-  startDate: Date;
-  /** End date of the hackathon.
-   * @warning Must be parsed from a unix timestamp in seconds
-   */
-  endDate: Date;
-  /** Number of participants in the hackathon */
-  participants: number;
-  /** Team of the user in the hackathon, if any */
-  team?: Team;
-}
-
 export * from "./types/user";
+export * from "./types/team";
+export * from "./types/hackathon";
