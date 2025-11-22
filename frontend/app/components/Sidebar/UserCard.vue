@@ -15,7 +15,12 @@
       </div>
 
       <NuxtLink to="/profile/settings" class="du-tooltip group/settings rounded-full p-1 transition hover:bg-neutral-700" data-tip="User Settings" @click.prevent>
-        <img class="size-6 transition-transform duration-1500 group-hover/settings:rotate-360 group-hover/settings:brightness-110" src="/icons/settings.svg" alt="Open user settings" />
+        <img
+          class="size-6 transition-transform duration-1500 group-hover/settings:rotate-360 group-hover/settings:brightness-110"
+          src="/icons/settings.svg"
+          alt="Open user settings"
+          draggable="false"
+        />
       </NuxtLink>
     </div>
 

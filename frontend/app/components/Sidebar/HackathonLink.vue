@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/hackathon/${hackathon.uuid}`"
+    :to="`/hackathons/${hackathon.uuid}`"
     class="group/hackathon-card hover:bg-bg-lighter flex w-full flex-col items-start justify-center rounded-lg px-4 py-2 transition select-none"
     :class="{ 'bg-neutral-700 hover:bg-neutral-700!': isActive }"
   >

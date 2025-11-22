@@ -7,7 +7,7 @@
     <div class="my-3 h-1 w-full rounded-full bg-neutral-700"></div>
 
     <div class="hackathon-scroll mb-20 flex h-full w-full flex-col items-center justify-start overflow-y-scroll">
-      <SidebarHackathonLink v-for="hackathon in currentHackathons" :key="hackathon.uuid" :hackathon="hackathon" :is-active="route.path.includes(`/hackathon/${hackathon.uuid}`)" />
+      <SidebarHackathonLink v-for="hackathon in currentHackathons" :key="hackathon.uuid" :hackathon="hackathon" :is-active="route.path.includes(`/hackathons/${hackathon.uuid}`)" />
     </div>
 
     <SidebarUserCard />

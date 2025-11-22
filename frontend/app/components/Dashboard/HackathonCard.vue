@@ -9,7 +9,7 @@
       <div class="flex flex-col items-end justify-center gap-2">
         <p class="text-sm text-gray-400" :title="hackathon.startDate.toLocaleString()">Starts: {{ daysUntil(hackathon.startDate) }}</p>
         <p class="text-sm text-gray-400" :title="hackathon.endDate.toLocaleString()">Ends: {{ daysUntil(hackathon.endDate) }}</p>
-        <NuxtLink :to="`/hackathon/${hackathon.uuid}`" class="bg-theme rounded-lg px-6 py-1.5 text-lg font-medium transition hover:brightness-105">View Hackathon</NuxtLink>
+        <NuxtLink :to="`/hackathons/${hackathon.uuid}`" class="bg-theme rounded-lg px-6 py-1.5 text-lg font-medium transition hover:brightness-105">View Hackathon</NuxtLink>
       </div>
     </div>
 
