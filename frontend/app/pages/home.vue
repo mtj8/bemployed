@@ -8,11 +8,18 @@
       </div>
 
       <div class="flex w-72 shrink-0 flex-col items-center justify-center gap-6">
-        <div class="bg-bg-darker flex h-82 w-full flex-col items-center justify-start gap-2 rounded-lg p-2">
+        <div class="bg-bg-darker flex w-full flex-col items-center justify-start gap-2 rounded-lg p-2">
           <DashboardFriendCard v-for="friend in friends.slice(0, 5)" :key="friend.uuid" :friend="friend" />
+          <NuxtLink to="/profile/friends" class="bg-bg-base hover:bg-bg-lighter flex w-full items-center justify-start gap-4 rounded-lg px-4 py-2 transition">
+            <img class="ms-1 size-8" src="/icons/people.svg" aria-hidden="true" />
+            <p>View All Friends</p>
+          </NuxtLink>
         </div>
 
-        <NuxtLink class="bg-bg-darker w-full rounded-lg px-8 py-3 text-lg font-semibold" to="/hackathons">Find Hackathons</NuxtLink>
+        <NuxtLink class="bg-bg-darker hover:bg-bg-darkest group/find-hackathons flex w-full items-center justify-center gap-3 rounded-lg px-8 py-3 transition" to="/hackathons">
+          <img src="/icons/search.svg" aria-hidden="true" class="size-7 transition group-hover/find-hackathons:brightness-125" />
+          <p class="text-lg font-medium transition group-hover/find-hackathons:brightness-125">Find Hackathons</p>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -27,6 +34,8 @@ definePageMeta({
 
 const userStore = useUserStore();
 const { currentHackathons, friends } = storeToRefs(userStore);
+
+// TODO: add infinite scroll for hackathons
 </script>
 
 <style scoped></style>
