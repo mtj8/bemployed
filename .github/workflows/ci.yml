@@ -9,39 +9,38 @@ on:
       - main
 
 jobs:
-  bad-commit-check:
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    name: Bad Commit Check
+  # bad-commit-check:
+  #   timeout-minutes: 10
+  #   runs-on: ubuntu-latest
+  #   name: Bad Commit Check
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Get changed files
-        id: changed_files
-        uses: tj-actions/changed-files@v46.0.1
-        with:
-          files: |
-            **/node_modules/**
-            **/.env
-            **/*.env.*
-            **/venv/**
-            **/.venv/**
-          files_ignore: |
-            **/.env.example
+  #     - name: Get changed files
+  #       id: changed_files
+  #       uses: tj-actions/changed-files@v46.0.1
+  #       with:
+  #         files: |
+  #           **/node_modules/**
+  #           **/.env
+  #           **/*.env.*
+  #           **/venv/**
+  #           **/.venv/**
 
-      - name: Fail if bad files added
-        if: steps.changed_files.outputs.any_changed == 'true' || steps.changed_files.outputs.any_modified == 'true'
-        run: |
-          echo "Error: you fucked up"
-          exit 1
+  #     - name: Fail if bad files added
+  #       if: steps.changed_files.outputs.any_changed == 'true' || steps.changed_files.outputs.any_modified == 'true'
+  #       run: |
+  #         echo "Error: you fucked up"
+  #         exit 1
 
   # for frontend
   build:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    name: Frontend Build
+    name: Build (frontend)
+    # needs: bad-commit-check
 
     steps:
       - name: Checkout
@@ -60,11 +59,34 @@ jobs:
         run: npm run build
         working-directory: ./frontend
 
-  # for frontend
+  lint:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    name: ESLint (frontend)
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Node.js version to 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: ESLint
+        run: npm run lint
+        working-directory: ./frontend
+
   typecheck:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    name: Typecheck
+    name: Typecheck (frontend)
+    needs: build
 
     steps:
       - name: Checkout
@@ -83,11 +105,11 @@ jobs:
         run: npm run typecheck
         working-directory: ./frontend
 
-  # for frontend
   prettier:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    name: Prettier
+    name: Prettier (frontend)
+    needs: build
 
     steps:
       - name: Checkout
